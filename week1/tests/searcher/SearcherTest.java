@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * @author Hugh Osborne
- * @version September 2018
+ * @author Hugh Osborne, Mateusz Larkowski
+ * @version December 2018
  */
 
 abstract class SearcherTest {
@@ -40,6 +40,11 @@ abstract class SearcherTest {
     @Test
     void test5thIn10() throws IndexingError {
         testSearcher(10,5);
+    }
+
+    @Test
+    void testIndexingError() throws IndexingError {
+        testSearcher(10, 11);
     }
     @Test
     void test3rdIn100() throws IndexingError {

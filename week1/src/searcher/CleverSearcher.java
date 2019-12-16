@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 
 /**
- * Implements the find (kth) element method by ...
+ * Implements the find (kth) element method by sorting and indexing using auxiliary array.
  *
  * @author Mateusz Larkowski
  * @version December 2019
@@ -20,6 +20,22 @@ public class CleverSearcher extends Searcher {
         super(array, k);
     }
 
+
+    /**
+     * Find the kth largest element in an array of ints using the "clever"
+     * solution from the lecture
+     *
+     * <ul>
+     *     <li> Load first k elements of array into auxiliary array </li>
+     *     <li> Sort auxiliary array</li>
+     *     <li> For every remaining element of given array, if its bigger than the smallest entry of auxiliary array</li>
+     *     <li> Replace the smallest entry of auxiliary array</li>
+     *     <li> Sort auxiliary array</li>
+     *     <li> Return the smallest entry of the auxiliary array</li>
+     * </ul>
+     *
+     * @return kth largest element of array
+     */
 
 
 
