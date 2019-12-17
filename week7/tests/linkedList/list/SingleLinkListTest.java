@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * A set of tests for SingleLinkedList
+ * There is no test for get() method, because it has been actively used in both add() and remove() methods
+ * @author Mateusz Larkowski
+ * @version December 2019
+ */
 class SingleLinkListTest {
 
     @Test
@@ -56,6 +62,10 @@ class SingleLinkListTest {
         assertThrows(ListAccessError.class,()->list1.remove(4));
     }
 
+    /**
+     * Populate the list with 100000 random Integers
+     * @throws ListAccessError
+     */
     @Test
     void testBigAmount() throws ListAccessError{
         IntegerArrayGenerator generator = new IntegerArrayGenerator(new IntegerScope(1,999));
