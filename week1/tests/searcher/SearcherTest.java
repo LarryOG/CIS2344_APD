@@ -5,6 +5,7 @@ import arrayGenerator.CleverRandomListingGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @author Hugh Osborne, Mateusz Larkowski
@@ -43,8 +44,8 @@ abstract class SearcherTest {
     }
 
     @Test
-    void testIndexingError() throws IndexingError {
-        testSearcher(10, 11);
+    void testIndexingError()  {
+        assertThrows(IndexingError.class,()->testSearcher(10, 11));
     }
     @Test
     void test3rdIn100() throws IndexingError {

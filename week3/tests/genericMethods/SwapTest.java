@@ -9,8 +9,21 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ *  A selection of tests for Swap generic method.
+ * @author Mateusz Larkowski
+ * @version December 2019
+ */
+
 class SwapTest {
 
+
+    /**
+     * Initialise array of 10 Strings.
+     * Implement a control method that swaps two elements in array and compares new array to swap generic method result.
+     * @param index1 position of 1st element to swap.
+     * @param index2 position of 2nd element to swap.
+     */
 
     private void testSwapStrings(int index1,int index2)  {
 
@@ -28,6 +41,13 @@ class SwapTest {
 
     }
 
+    /**
+     * Initialise array of 10 Doubles.
+     * Implement a control method that swaps two elements in array and compares new array to swap generic method result.
+     * @param index1 position of 1st element to swap.
+     * @param index2 position of 2nd element to swap.
+     */
+
     private void testSwapDouble(int index1,int index2)  {
 
 
@@ -44,7 +64,12 @@ class SwapTest {
 
     }
 
-
+    /**
+     * Initialise array of 10 Integers.
+     * Implement a control method that swaps two elements in array and compares new array to swap generic method result.
+     * @param index1 position of 1st element to swap.
+     * @param index2 position of 2nd element to swap.
+     */
 
     private void testSwapInteger(int index1,int index2) {
 
@@ -62,6 +87,12 @@ class SwapTest {
 
     }
 
+    /**
+     * Initialise array of 10 Characters.
+     * Implement a control method that swaps two elements in array and compares new array to swap generic method result.
+     * @param index1 position of 1st element to swap.
+     * @param index2 position of 2nd element to swap.
+     */
 
     private void testSwapCharacter(int index1,int index2)  {
 
@@ -163,11 +194,14 @@ class SwapTest {
         testSwapCharacter(9,3);
     }
 
+    /**
+     * Test Swap generic method on array of different objects.
+     */
     @Test
-    void testMultipleObjectArraySwap() {
+    void testMultipleObjectTypeArraySwap() {
 
-        Object[] array = new Object[]{1,'a',2.5,"string",new int[]{1,2,3,4,5,6}};
-        Object[] array2 = new Object[]{new int[]{1,2,3,4,5,6},'a',2.5,"string",1};
+        Object[] array = new Object[]{1,'a',2.5,"string",7};
+        Object[] array2 = new Object[]{7,'a',2.5,"string",1};
 
         assertTrue(Arrays.equals(Swap.swapElements(array,0,4),array2));
     }
