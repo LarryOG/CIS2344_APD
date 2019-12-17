@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 
 /**
- * Implements the find (kth) element method by sorting and indexing using auxiliary array.
+ * Implements the find (kth) element method by sorting and indexing with the help of auxiliary array.
  *
  * @author Mateusz Larkowski
  * @version December 2019

@@ -1,5 +1,6 @@
 package linkedList.list;
 
+import javafx.scene.control.Alert;
 import linkedList.node.ListNode;
 import linkedList.node.SingleLinkNode;
 
@@ -13,7 +14,7 @@ import linkedList.node.SingleLinkNode;
  * @author Hugh Osborne
  * @version October 2019
  */
-public abstract class SingleLinkList<T> extends BasicList<SingleLinkNode<T>,T> implements List<T> {
+public  class SingleLinkList<T> extends BasicList<SingleLinkNode<T>,T> implements List<T> {
 
     /**
      * A helper method to access a node at a specified index.
@@ -21,7 +22,7 @@ public abstract class SingleLinkList<T> extends BasicList<SingleLinkNode<T>,T> i
      * @param index the index of the node to be accessed.
      * @throws ListAccessError if there is no node with the given index.
      */
-    ListNode<T> getNode(int index) throws ListAccessError {
+    SingleLinkNode<T> getNode(int index) throws ListAccessError {
         // Is the list empty?  If so, cannot access the node.
         if (isEmpty()) {
             throw new ListAccessError("Cannot get node.  List is empty.");
@@ -37,9 +38,9 @@ public abstract class SingleLinkList<T> extends BasicList<SingleLinkNode<T>,T> i
          * required node has been found.  If the end of the list is reached (next node is null), before
          * the index reaches zero, there were not enough nodes in the list (the index was too high).
          */
-        ListNode<T> currentNode = getRoot(); // start at the root
+        SingleLinkNode<T> currentNode = getRoot(); // start at the root
         while (index != 0 && currentNode != null) { // walk along the list (if haven't reached the end by hitting null node)
-            currentNode = currentNode.getNext(); // by gettting next node in the list
+            currentNode = currentNode.getNext(); // by getting next node in the list
             index--; // and reducing index by one
         }
         // Reached the end of the list (by hitting null node)?  If so, cannot access the required node.
@@ -50,12 +51,52 @@ public abstract class SingleLinkList<T> extends BasicList<SingleLinkNode<T>,T> i
         return currentNode;
     }
 
-    ListNode<T> removeNode(int index) throws ListAccessError {
-        ListNode<T> removedNode = getNode(index);
+    SingleLinkNode<T> removeNode(int index) throws ListAccessError {
+
+        if (isEmpty()) {
+            throw new ListAccessError("Cannot remove node.  List is empty.");
+        }else if (index < 0) {
+            throw new ListAccessError("Cannot remove node.  Negative index.");
+        }
+
+
+        SingleLinkNode<T> node = null;
+        try {
+            node = getNode(index);
+            SingleLinkNode<T> prevNode = getNode(index-1);
+            prevNode.setNext(node.getNext());
+        } catch (ListAccessError listAccessError) {
+            throw new ListAccessError("Cannot remove node.  Not enough nodes in the list.");
+        }
+        return node;
+    }
 
 
 
-        return removedNode;
+
+
+
+    public void add(int index, T value) throws ListAccessError {
+         if (index < 0) {
+            throw new ListAccessError("Cannot add node.  Negative index.");
+        }else if (index == 0) {
+            SingleLinkNode<T> addNode = new SingleLinkNode<T>(value,getRoot());
+            setRoot(addNode);
+        }else {
+            try {
+                SingleLinkNode<T> nodeToAdd = new SingleLinkNode<>(value);
+                SingleLinkNode<T> prevNode = getNode(index-1);
+                SingleLinkNode<T> nextNode = prevNode.getNext();
+                prevNode.setNext(nodeToAdd);
+                nodeToAdd.setNext(nextNode);
+            } catch (ListAccessError listAccessError) {
+                throw new ListAccessError("Cannot add node at given position.  Not enough nodes in the list.");
+            }
+        }
+    }
+
+    public T remove(int index) throws ListAccessError {
+        return removeNode(index).getValue();
     }
 
     /**
