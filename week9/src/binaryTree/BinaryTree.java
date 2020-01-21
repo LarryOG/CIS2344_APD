@@ -112,7 +112,6 @@ public class BinaryTree<T extends Comparable<? super T>> implements BTree<T> {
      * @return this tree's right subtree.
      */
     public BTree<T> getRight() throws NullPointerException {
-        // placeholder return value below - replace with implementation of getRight()
         return root.getRight();
     }
 
