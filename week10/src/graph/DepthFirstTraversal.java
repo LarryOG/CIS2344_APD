@@ -8,7 +8,6 @@ public class DepthFirstTraversal<T> extends AdjacencyGraph<T> implements Travers
 
     private List<T> traversal = new ArrayList<>();
     private Stack<T> stack = new Stack<>();
-    private List<T> visited = new ArrayList<>();
 
 
 
@@ -24,13 +23,12 @@ public class DepthFirstTraversal<T> extends AdjacencyGraph<T> implements Travers
         for (int i=0; i<noOfNodes; i++) {
             T node = getUnvisitedNode();
             stack.push(node);
-            visited.add(node);
             while (!stack.isEmpty()){
                 traversal.add(stack.pop());
                 for (int x=0; x < traversal.size(); x++){
                     T toDo = traversal.get(x);
                     for (T neighbour: getNeighbours(toDo)){
-                        if (!visited.contains(neighbour)) {
+                        if (!traversal.contains(neighbour)) {
                             stack.push(neighbour);
                         }
                     }
@@ -51,7 +49,7 @@ public class DepthFirstTraversal<T> extends AdjacencyGraph<T> implements Travers
      */
     private T getUnvisitedNode() {
         for (T node: getNodes()) {
-            if (!visited.contains(node)) {
+            if (!traversal.contains(node)) {
                 return node;
             }
         }
