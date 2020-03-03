@@ -6,9 +6,32 @@ import ferrocarrilesDeAmericaDelSur.tools.Clock;
 import ferrocarrilesDeAmericaDelSur.tools.Delay;
 
 /**
- * An implementation of a railway.  The runTrain method, should, in collaboration with Bolivia's runTrain(), guarantee
- * safe joint operation of the railways.
- */
+* An implementation of railway, with guaranteed safe crossing of the pass using Dekker's algorithm.
+*
+*  while (true) {
+*     procReqCS[id] = true;
+*     while (procReqCS[(id+1)%2]) {
+*       if (turn == (id+1) % 2){
+*           procReqCS[id] = false;
+*           while (turn != id);
+*           procReqCS[id] = true;
+*       }
+*     }
+*     critical section;
+*     turn = (id+1) % 2;
+*     procReqCS[id] = false;
+*   }
+*
+*   Implementing this for railways we will use the railway's basket as an implementation
+*   of the procReqCS[id] boolean, with a stone in the basket for true, and no stone modelling
+*   false.  The other railway's basket (modelling procReqCS[(id+1)%2]) can be accessed through
+*   the railway system in the way shown in figure 5 of the practical notes.
+*   The shared basket will be used to model priority/turn I.e. If there is a in the shared-
+*   basket, it's Bolivia's turn, and no stone modelling Peru's turn.
+*   The critical section corresponds to the crossPass() method, and the (implicit)
+*   non-critical section is the choochoo() method.
+*
+*/
 public class Peru extends Railway {
 	/**
 	 * Change the parameters of the Delay constructor in the call of the superconstructor to
@@ -26,20 +49,22 @@ public class Peru extends Railway {
     public void runTrain() throws RailwaySystemError {
 
     	Clock clock = getRailwaySystem().getClock();
-        Railway nextRailway = getRailwaySystem().getNextRailway(this); // find out from the railway system which is the other railway
+        Railway nextRailway = getRailwaySystem().getNextRailway(this); // get access to other railway's basket.
         while (!clock.timeOut()) {
-    		choochoo();
-            getBasket().putStone();
-            while (nextRailway.getBasket().hasStone()) {
-                if (getSharedBasket().hasStone()) {
-                    getBasket().takeStone();
-                    while (getSharedBasket().hasStone());
-                    getBasket().putStone();
+    		choochoo(); //non critical section
+            getBasket().putStone(); // signal that you want to cross the path (put a stone in your basket)
+            while (nextRailway.getBasket().hasStone()) { //while Bolivia wants to cross the path
+                if (getSharedBasket().hasStone()) { // check if its not your turn
+                    getBasket().takeStone(); //stop signalling need to cross the path
+                    while (getSharedBasket().hasStone()){ //and wait until its your turn
+                        siesta(); //get tipsy while waiting...
+                    }
+                    getBasket().putStone(); // once your turn, put the stone in your basket
                 }
             }
-            crossPass();
-            getSharedBasket().putStone();
-            getBasket().takeStone();
+            crossPass();//cross the path (critical section)
+            getSharedBasket().putStone(); //give turn to other railway
+            getBasket().takeStone();  //stop signaling need to cross the path.
     	}
     }
 }
