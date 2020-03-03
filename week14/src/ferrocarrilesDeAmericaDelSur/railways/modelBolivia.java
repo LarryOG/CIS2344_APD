@@ -2,6 +2,11 @@ package railways;
 
 import errors.RailwaySystemError;
 import errors.SetUpError;
+import ferrocarrilesDeAmericaDelSur.errors.RailwaySystemError;
+import ferrocarrilesDeAmericaDelSur.errors.SetUpError;
+import ferrocarrilesDeAmericaDelSur.railways.Railway;
+import ferrocarrilesDeAmericaDelSur.tools.Clock;
+import ferrocarrilesDeAmericaDelSur.tools.Delay;
 import tools.Clock;
 import tools.Delay;
 
@@ -34,7 +39,7 @@ public class Bolivia extends Railway {
 	 * Change the parameters of the Delay constructor in the call of the superconstructor to
 	 * change the behaviour of this railway.
 	 */
-	public Bolivia() throws SetUpError{
+	public Bolivia() throws SetUpError {
 		super("Bolivia",new Delay(0.1,0.3));
 	}
 

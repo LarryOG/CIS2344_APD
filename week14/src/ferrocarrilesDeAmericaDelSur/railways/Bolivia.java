@@ -21,17 +21,24 @@ public class  Bolivia extends Railway {
 
     /**
      * Run the train on the railway.
-     * This method currently does not provide any synchronisation to avoid two trains being in the pass at the same time.
+     * This method provide correct synchronisation to avoid two trains being in the pass at the same time.
      */
     public void runTrain() throws RailwaySystemError {
     	Clock clock = getRailwaySystem().getClock();
+        Railway nextRailway = getRailwaySystem().getNextRailway(this); // find out from the railway system which is the other railway
     	while (!clock.timeOut()) {
     		choochoo();
-			getSharedBasket().putStone();
-
-			while (getSharedBasket().hasStone());
+			getBasket().putStone();
+			while (nextRailway.getBasket().hasStone()) {
+			    if (!getSharedBasket().hasStone()) {
+			        getBasket().takeStone();
+			        while (!getSharedBasket().hasStone());
+			        getBasket().putStone();
+                }
+            }
 			crossPass();
 			getSharedBasket().takeStone();
+			getBasket().takeStone();
     	}
     }
 }

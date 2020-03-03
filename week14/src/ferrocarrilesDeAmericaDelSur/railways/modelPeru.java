@@ -3,6 +3,8 @@ package railways;
 import errors.RailwaySystemError;
 
 import errors.SetUpError;
+import ferrocarrilesDeAmericaDelSur.errors.RailwaySystemError;
+import ferrocarrilesDeAmericaDelSur.railways.Railway;
 import tools.Clock;
 import tools.Delay;
 
