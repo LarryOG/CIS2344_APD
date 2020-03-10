@@ -26,7 +26,7 @@ import ferrocarrilesDeAmericaDelSur.tools.Delay;
 *   of the procReqCS[id] boolean, with a stone in the basket for true, and no stone modelling
 *   false.  The other railway's basket (modelling procReqCS[(id+1)%2]) can be accessed through
 *   the railway system in the way shown in figure 5 of the practical notes.
-*   The shared basket will be used to model priority/turn I.e. If there is a in the shared-
+*   The shared basket will be used to model priority/turn I.e. If there is a stone in the shared-
 *   basket, it's Bolivia's turn, and no stone modelling Peru's turn.
 *   The critical section corresponds to the crossPass() method, and the (implicit)
 *   non-critical section is the choochoo() method.
@@ -54,9 +54,9 @@ public class Peru extends Railway {
     		choochoo(); //non critical section
             getBasket().putStone(); // signal that you want to cross the path (put a stone in your basket)
             while (nextRailway.getBasket().hasStone()) { //while Bolivia wants to cross the path
-                if (getSharedBasket().hasStone()) { // check if its not your turn
-                    getBasket().takeStone(); //stop signalling need to cross the path
-                    while (getSharedBasket().hasStone()){ //and wait until its your turn
+                if (getSharedBasket().hasStone()) {         // check if its not your turn
+                    getBasket().takeStone();                //stop signalling need to cross the path
+                    while (getSharedBasket().hasStone()){   //and wait until its your turn
                         siesta(); //get tipsy while waiting...
                     }
                     getBasket().putStone(); // once your turn, put the stone in your basket

@@ -110,7 +110,7 @@ public class RailwaySystem {
     	List<Railway> railways = new ArrayList<Railway>();
     	railways.add(new Peru());
     	railways.add(new Bolivia());
-    	Clock clock = new Clock(1.0,20); // 20 ticks of 1 second
+    	Clock clock = new Clock(1.0,2000); // 20 ticks of 1 second
     	RailwaySystem system = new RailwaySystem(railways,clock);
     	system.traceOn();
     	system.start();

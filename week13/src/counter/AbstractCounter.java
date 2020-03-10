@@ -33,7 +33,7 @@ public abstract class AbstractCounter extends Thread
     /**
      * The counter is shared between all instances of AbstractCounter.
      **/
-    private  int counter;
+    private static int counter;
 
     /**
      * The most detailed constructor, allowing for specification of all parameters of the counter.
@@ -189,7 +189,7 @@ public abstract class AbstractCounter extends Thread
      * Get the current value of the shared count.
      * @return the current value of the shared count.
      */
-    public  int getCount() {
+    public static int getCount() {
         return counter;
     }
 

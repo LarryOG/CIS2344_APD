@@ -24,7 +24,7 @@ public class Main {
         counters.add(new Counter(" up ",0,10,1)); // counter "up" counts from 0 to 10
         counters.add(new Counter("down",10,0,-1 )); // counter "down" counts from 10 to 0
         Counter.traceOn(); // switch tracing on
-        Counter.setDelay(0.01,0.02); // set a delay from 0.0 to 0.1 seconds
+        Counter.setDelay(1,7); // set a delay from 0.0 to 0.1 seconds
         Counter.resetTraceLineNumber();
         counters.run();
     }
