@@ -66,7 +66,7 @@ public class BufferSystem extends Thread
      */
     @SuppressWarnings("unchecked") // suppress warning from cast of argument of sleep
     public static void main(String[] args) {
-        int bufferSize = 10; // default buffer size
+        int bufferSize = 1; // default buffer size
         double bufferTimeToRun = 20.0, // default run time in seconds
                producerDelay = MEDIUM, // default producer delay
                consumerDelay = MEDIUM;  // default consumer delay
